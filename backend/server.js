@@ -9,12 +9,11 @@ const PORT = process.env.PORT || 5001;
 // السماح لأصلين (Origins) محددين فقط بالوصول للسيرفر
 const allowedOrigins = [
   'http://localhost:3002',               // بيئة التطوير المحلية
-  'https://ev-parking-app.vercel.app',  // عنوان الواجهة الأمامية على Vercel
+  'https://ev-parking-app-we3g.vercel.app',  // تحديث النطاق الصحيح لـ Vercel
 ];
 
 app.use(cors({
   origin: function(origin, callback){
-    // السماح بالطلبات بدون origin (مثل Postman أو أدوات اختبار API)
     if(!origin) return callback(null, true);
     if(allowedOrigins.indexOf(origin) === -1){
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
