@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* أنماط مخصصة إذا لزم الأمر */
+.confirmation-page {
+  min-height: 100vh;
+  background-color: #f3f4f6;
+}
