@@ -10,7 +10,7 @@ function RecommendationBox() {
       const { latitude, longitude } = position.coords;
 
       try {
-    const res = await axios.post('https://ev-parking-app-backend.onrender.com/api/recommend', {
+    const API_URL = process.env.REACT_APP_API_URL || 'https://ev-parking-app-4.onrender.com/api';
    userLocation: { latitude, longitude },
     preferredType,
   });
