@@ -22,7 +22,8 @@ const BookingForm = ({ spot, onConfirm }) => {
     };
 
     try {
-      await axios.post('http://localhost:5001/api/bookings', bookingData);
+     await axios.post('https://ev-parking-app-backend.onrender.com/api/bookings', bookingData);
+
       onConfirm(bookingData);
     } catch (err) {
       console.error('Error saving booking:', err);

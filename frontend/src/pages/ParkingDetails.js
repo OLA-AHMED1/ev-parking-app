@@ -28,10 +28,12 @@ function ParkingDetails() {
     let isMounted = true;
 
     const fetchSpot = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5001/api/parking/${id}`, {
-          timeout: 5000,
-        });
+   try {
+  const response = await axios.get(`https://ev-parking-app-backend.onrender.com/api/parking/${id}`, {
+    timeout: 5000,
+  });
+
+
 
         if (!response.data || typeof response.data !== 'object') {
           throw new Error('البيانات المستلمة غير صحيحة');

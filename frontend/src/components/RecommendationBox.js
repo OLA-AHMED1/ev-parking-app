@@ -10,10 +10,11 @@ function RecommendationBox() {
       const { latitude, longitude } = position.coords;
 
       try {
-        const res = await axios.post('http://localhost:5001/api/recommend', {
-          userLocation: { latitude, longitude },
-          preferredType,
-        });
+    const res = await axios.post('https://ev-parking-app-backend.onrender.com/api/recommend', {
+   userLocation: { latitude, longitude },
+    preferredType,
+  });
+
         setTopSpots(res.data);
       } catch (error) {
         console.error('فشل في جلب التوصية:', error);

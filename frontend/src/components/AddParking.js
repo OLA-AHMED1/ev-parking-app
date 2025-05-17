@@ -17,7 +17,7 @@ const AddParking = () => {
     setLoading(true);
     setMessage('');
     try {
-      const response = await axios.post('http://localhost:5001/api/parking/add', newParking);
+      const response = await axios.post('https://ev-parking-app-backend.onrender.com/api/parking/add', newParking);
       setMessage('✅ Parking added successfully!');
       console.log('Parking added:', response.data);
     } catch (err) {

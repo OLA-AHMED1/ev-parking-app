@@ -24,7 +24,8 @@ const BookingDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/api/parking/${id}`, { timeout: 5000 })
+      .get(`https://ev-parking-app-backend.onrender.com/api/parking/${id}`, { timeout: 5000 })
+
       .then(response => {
         if (response.data && typeof response.data === 'object') {
           setSpot(response.data);

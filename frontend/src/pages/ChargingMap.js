@@ -11,7 +11,7 @@ const ChargingMap = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5001/api/chargers', { timeout: 5000 })
+      .get('https://ev-parking-app-backend.onrender.com/api/chargers', { timeout: 5000 })
       .then(response => {
         if (Array.isArray(response.data)) {
           setChargers(response.data);
