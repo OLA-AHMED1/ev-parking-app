@@ -6,12 +6,25 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// إعداد CORS للسماح للواجهة الأمامية فقط
+// السماح لأصلين (Origins) محددين فقط بالوصول للسيرفر
+const allowedOrigins = [
+  'http://localhost:3002',               // بيئة التطوير المحلية
+  'https://ev-parking-app.vercel.app',  // عنوان الواجهة الأمامية على Vercel
+];
+
 app.use(cors({
-  origin: 'http://localhost:3002', // عدّل الرابط حسب موقع الواجهة لديك
+  origin: function(origin, callback){
+    // السماح بالطلبات بدون origin (مثل Postman أو أدوات اختبار API)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
 }));
 
-// Middleware لتحليل JSON في الجسم
+// Middleware لتحليل JSON في جسم الطلبات
 app.use(express.json());
 
 // الاتصال بـ MongoDB
@@ -19,9 +32,9 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .then(() => console.log('✅ متصل بـ MongoDB Atlas'))
   .catch(err => console.error('❌ خطأ في الاتصال بـ MongoDB:', err));
 
-// Route أساسي لاختبار الخادم
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the EV Parking API!' });
+// Route اختبار بسيط
+app.get('/test', (req, res) => {
+  res.json({ status: 'server is running' });
 });
 
 // استيراد الراوتات وربطها
@@ -39,5 +52,5 @@ app.use('/api/recommend', recommendRoutes);
 
 // تشغيل الخادم
 app.listen(PORT, () => {
-  console.log(`✅ الخادم يعمل على: http://localhost:${PORT}`);
+  console.log(`✅ الخادم يعمل على المنفذ: ${PORT}`);
 });
